@@ -36,7 +36,7 @@ pip install -r requirements.txt
 ```
 
 ### Ejemplo para Claude Desktop
-Añada a `claude_desktop_config.json`:
+Añada a `claude_desktop_config.json` (Actualice las direcciones con sus rutas de sistema):
 ```json
 {
   "mcpServers": {

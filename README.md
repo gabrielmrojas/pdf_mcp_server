@@ -33,7 +33,7 @@ python -m fastmcp_pdf_server
 - Tools are registered using `@app.tool()` and return structured outputs with a `meta` block containing `operation_id` and `execution_ms`.
 
 ### Claude Desktop config example
-Add to `claude_desktop_config.json`:
+Add to `claude_desktop_config.json` (Update with your own File System Path):
 ```json
 {
   "mcpServers": {
