@@ -1,0 +1,70 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Pytest cache
+.pytest_cache/
+
+# mypy
+.mypy_cache/
+
+# IDEs
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs and temporary data
+logs/*
+temp_files/*
+
+# Local env files
+.env
+.env.local
+
+# Coverage
+htmlcov/
+.coverage
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Build artifacts
+*.pyc
+
+ 
+# Windows specific
+$RECYCLE.BIN/
+
+# Visual Studio
+.vs/
+.github/
+
+#Others
+*.log
+*.sqlite3
+*.db
+plan.md
+/docs
+GEMINI.md

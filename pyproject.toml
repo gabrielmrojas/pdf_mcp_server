@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fastmcp-pdf-server"
+version = "0.1.0"
+description = "FastMCP-based MCP server for PDF processing over STDIO"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "Your Name" }]
+license = { text = "MIT" }
+dependencies = [
+  "fastmcp>=0.3.0",
+  "PyPDF2>=3.0.0",
+  "pdfplumber>=0.9.0",
+  "reportlab>=4.0.0",
+  "Pillow>=10.0.0",
+  "pdf2image>=1.16.0",
+  "python-dotenv>=1.0.0",
+  "pydantic>=2.0.0",
+  "pydantic-settings>=2.0.0",
+  "requests>=2.31.0",
+]
+
+[project.scripts]
+fastmcp-pdf-server = "fastmcp_pdf_server.main:run"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["fastmcp_pdf_server*"]
