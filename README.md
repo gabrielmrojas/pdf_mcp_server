@@ -2,6 +2,8 @@
 
 An MCP server built with FastMCP (STDIO transport) offering PDF utilities: text extraction, metadata, merge/split/rotate, and PDF↔image conversion.
 
+SPANISH VERSION [README.es.md]
+
 ## Quick Start (Windows PowerShell)
 ```
 python -m venv .venv
@@ -14,6 +16,15 @@ python -m fastmcp_pdf_server
 If installed as a package, you may also run:
 ```
 fastmcp-pdf-server
+```
+
+## Quick Start (Linux/macOS)
+```
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+cp .env.example .env
+python -m fastmcp_pdf_server
 ```
 
 ## MCP Integration
@@ -48,6 +59,48 @@ Add to `claude_desktop_config.json`:
 Note: If you update dependencies (e.g., we added `requests` for URL uploads), reinstall with:
 ```
 pip install -r requirements.txt
+```
+
+### Claude Desktop config example (Linux)
+Add to `claude_desktop_config.json`:
+```json
+{
+  "mcpServers": {
+    "pdf-processor-server": {
+      "command": "python3",
+      "args": [
+        "-m",
+        "fastmcp_pdf_server"
+      ],
+      "env": {
+        "MAX_FILE_SIZE_MB": "50",
+        "TEMP_DIR": "/home/you/dev/mcp_pdf_server/temp_files",
+        "LOG_LEVEL": "DEBUG"
+      }
+    }
+  }
+}
+```
+
+### Claude Desktop config example (macOS)
+Add to `claude_desktop_config.json`:
+```json
+{
+  "mcpServers": {
+    "pdf-processor-server": {
+      "command": "python3",
+      "args": [
+        "-m",
+        "fastmcp_pdf_server"
+      ],
+      "env": {
+        "MAX_FILE_SIZE_MB": "50",
+        "TEMP_DIR": "/Users/you/dev/mcp_pdf_server/temp_files",
+        "LOG_LEVEL": "DEBUG"
+      }
+    }
+  }
+}
 ```
 
 ### Programmatic usage (Python)
@@ -405,6 +458,20 @@ Path helpers:
 - Extract, add `poppler-*/Library/bin` to your `PATH`.
 - Verify: `pdftoppm -v` prints a version. If not available, `pdf_to_images` tools will raise helpful errors.
 
+## Linux: Poppler for pdf2image
+`pdf2image` requires Poppler binaries. Install via your package manager:
+- Debian/Ubuntu: `sudo apt update && sudo apt install -y poppler-utils`
+- Fedora: `sudo dnf install -y poppler-utils`
+- Arch: `sudo pacman -S --noconfirm poppler`
+- Verify: `pdftoppm -v` prints a version.
+
+## macOS: Poppler for pdf2image
+Install Poppler with Homebrew:
+```
+brew install poppler
+```
+If Homebrew is in `/opt/homebrew/bin` (Apple Silicon), ensure your shell PATH includes it. Verify: `pdftoppm -v`.
+
 ## Developer Guide
 
 ### Project layout
@@ -421,6 +488,15 @@ python -m venv .venv
 \.\.venv\Scripts\Activate.ps1
 pip install -r requirements.txt
 Copy-Item .env.example .env
+python -m fastmcp_pdf_server
+```
+
+Linux/macOS:
+```
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+cp .env.example .env
 python -m fastmcp_pdf_server
 ```
 

@@ -16,6 +16,15 @@ Si se instala como paquete, también puede ejecutar:
 fastmcp-pdf-server
 ```
 
+## Inicio Rápido (Linux/macOS)
+```
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+cp .env.example .env
+python -m fastmcp_pdf_server
+```
+
 ## Integración MCP
 - Transporte: STDIO. No imprimir en stdout/stderr; los logs van a archivo.
 - Nombre/versión del servidor: desde la config (`server_name`, `server_version`).
@@ -47,6 +56,48 @@ Añada a `claude_desktop_config.json`:
         "PATH": "%PATH%;C:\\poppler-25.07.0\\Library\\bin"
       }
     }
+}
+```
+
+### Ejemplo Claude Desktop (Linux)
+Añada a `claude_desktop_config.json`:
+```json
+{
+  "mcpServers": {
+    "pdf-processor-server": {
+      "command": "python3",
+      "args": [
+        "-m",
+        "fastmcp_pdf_server"
+      ],
+      "env": {
+        "MAX_FILE_SIZE_MB": "50",
+        "TEMP_DIR": "/home/usuario/dev/mcp_pdf_server/temp_files",
+        "LOG_LEVEL": "DEBUG"
+      }
+    }
+  }
+}
+```
+
+### Ejemplo Claude Desktop (macOS)
+Añada a `claude_desktop_config.json`:
+```json
+{
+  "mcpServers": {
+    "pdf-processor-server": {
+      "command": "python3",
+      "args": [
+        "-m",
+        "fastmcp_pdf_server"
+      ],
+      "env": {
+        "MAX_FILE_SIZE_MB": "50",
+        "TEMP_DIR": "/Users/usuario/dev/mcp_pdf_server/temp_files",
+        "LOG_LEVEL": "DEBUG"
+      }
+    }
+  }
 }
 ```
 
@@ -221,6 +272,20 @@ Rutas derivadas:
 - Extraer y añadir `poppler-*/Library/bin` al `PATH`.
 - Verificar: `pdftoppm -v` debe mostrar versión.
 
+## Linux: Poppler para pdf2image
+Instale Poppler con su gestor de paquetes:
+- Debian/Ubuntu: `sudo apt update && sudo apt install -y poppler-utils`
+- Fedora: `sudo dnf install -y poppler-utils`
+- Arch: `sudo pacman -S --noconfirm poppler`
+- Verifique: `pdftoppm -v` debe mostrar versión.
+
+## macOS: Poppler para pdf2image
+Instale Poppler con Homebrew:
+```
+brew install poppler
+```
+Si Homebrew está en `/opt/homebrew/bin` (Apple Silicon), asegúrese de incluirlo en su PATH. Verifique con `pdftoppm -v`.
+
 ## Guía de Desarrollo
 
 ### Estructura del Proyecto
@@ -237,6 +302,15 @@ python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 pip install -r requirements.txt
 Copy-Item .env.example .env
+python -m fastmcp_pdf_server
+```
+
+Linux/macOS:
+```
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+cp .env.example .env
 python -m fastmcp_pdf_server
 ```
 
